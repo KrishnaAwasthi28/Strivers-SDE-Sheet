@@ -1,0 +1,31 @@
+package Strings;
+
+public class StringToInteger {
+    public int myAtoi(String s) {
+        if(s.length()==0) return 0;
+        int i=0;
+        int n=s.length();
+        while (i < n && s.charAt(i) == ' ') {
+            i++;
+        }
+        if (i == n) {
+            return 0;
+        }
+        int sign = 1;
+        if (s.charAt(i) == '+') {
+            i++;
+        } else if (s.charAt(i) == '-') {
+            sign = -1;
+            i++;
+        }
+        long res=0;
+        while(i<n && Character.isDigit(s.charAt(i))){
+            res=(res*10)+(s.charAt(i)-'0');
+            if(res*sign >= Integer.MAX_VALUE) return Integer.MAX_VALUE;
+            if(res*sign <= Integer.MIN_VALUE) return Integer.MIN_VALUE;
+            i++;
+        }
+        
+        return (int)res*sign;
+    }
+}
